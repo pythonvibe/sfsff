@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анимация появления текста</title>
+    <style>
+        html, body {
+            height: 100%; /* Занять весь экран */
+            margin: 0; /* Убрать отступы */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #000; /* Черный фон */
+            color: #fff; /* Белый текст */
+            font-family: Arial, sans-serif;
+        }
+
+        #hello {
+            opacity: 0; /* Начальная непрозрачность */
+            font-size: 48px;
+            animation: fadeIn 1s forwards; /* Анимация появления */
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0; /* Полностью прозрачный */
+                transform: scale(1.2); /* Увеличение */
+            }
+            100% {
+                opacity: 1; /* Полностью видимый */
+                transform: scale(1); /* Нормальный размер */
+            }
+        }
+
+        .button-container {
+            display: flex; /* Расположение кнопок в ряд */
+            gap: 20px; /* Промежуток между кнопками */
+            margin-top: 20px;
+        }
+
+        .button {
+            padding: 10px 20px;
+            font-size: 20px;
+            color: #000; /* Черный текст */
+            background-color: #fff; /* Белый цвет кнопки */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            opacity: 0; /* Начальная непрозрачность кнопок */
+            animation: fadeInButtons 1s forwards; /* Анимация для кнопок */
+            animation-delay: 1s; /* Задержка, чтобы кнопки появились после текста */
+            transition: background-color 0.3s; /* Плавный переход цвета */
+        }
+
+        .button:hover {
+            background-color: #e0e0e0; /* Цвет кнопки при наведении */
+        }
+
+        @keyframes fadeInButtons {
+            0% {
+                opacity: 0; /* Полностью прозрачный */
+                transform: translateY(20px); /* Сдвинуть вниз */
+            }
+            100% {
+                opacity: 1; /* Полностью видимый */
+                transform: translateY(0); /* Нормальное положение */
+            }
+        }
+
+        #codeInput {
+            opacity: 0; /* Начальная непрозрачность поля ввода */
+            font-size: 20px;
+            margin-top: 20px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            animation: fadeInInput 1s forwards; /* Анимация для поля ввода */
+            animation-delay: 1.5s; /* Задержка, чтобы поле ввода появилось после кнопок */
+        }
+
+        @keyframes fadeInInput {
+            0% {
+                opacity: 0; /* Полностью прозрачный */
+                transform: translateY(20px); /* Сдвинуть вниз */
+            }
+            100% {
+                opacity: 1; /* Полностью видимый */
+                transform: translateY(0); /* Нормальное положение */
+            }
+        }
+    </style>
+</head>
+<body>
+    <p id="hello"></p>
+    <div class="button-container">
+        <button class="button" id="exitButton">Exit</button>
+        <button class="button" id="enterCodeButton">Enter Code</button>
+    </div>
+    <input type="text" id="codeInput" placeholder="Введите код" />
+
+    <script>
+        document.getElementById("hello").innerHTML = "hello";
+
+        // Обработчик события для кнопки Exit
+        document.getElementById("exitButton").onclick = function() {
+            window.location.href = "finish.html"; // Перенаправление на finish.html
+        };
+
+        // Обработчик события для кнопки Enter Code
+        document.getElementById("enterCodeButton").onclick = function() {
+            const codeInput = document.getElementById("codeInput").value;
+            const correctCode = "1488"; // Правильный код
+
+            if (codeInput === correctCode) {
+                window.location.href = "finish.html"; // Перенаправление на finish.html
+            } else {
+                alert("Неправильный код, попробуйте снова."); // Уведомление о неправильном коде
+            }
+        };
+    </script>
+</body>
+</html>
